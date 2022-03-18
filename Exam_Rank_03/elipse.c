@@ -16,9 +16,11 @@ int ft_close(FILE *file) {
 
 int main (int argc, char **argv) {
     FILE *file;
-    int i = 0, j, arg, width, height;
+// unique
     float x, y, res, radius;
+// unique
     char **area, back, symb, c;
+    int i = 0, j, arg, width, height;
     if (argc != 2)
         return (write(1, "Error: argument\n", 16) && 1);
     if (!(file = fopen(argv[1], "r")))
@@ -36,6 +38,7 @@ int main (int argc, char **argv) {
         while (j < width)
             area[i][j++] = back; i++;
     }
+    // no repeat
     while ((arg = fscanf(file, "%c %f %f %f %c\n", &c, &x, &y, &radius, &symb)) == 5) {
         if ((c != 'c' && c != 'C') || radius <= 0)
             return (write(1, "Error: Operation file corrupted\n", 32) && ft_free(area, height) && ft_close(file));
@@ -50,6 +53,7 @@ int main (int argc, char **argv) {
             } i++;
         }
     }
+    // no repeat
     if (arg > 0 && arg != 5)
         return (write(1, "Error: Operation file corrupted\n", 32) && ft_free(area, height) && ft_close(file));
     i = 0;
