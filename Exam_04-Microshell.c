@@ -58,7 +58,7 @@ int main(int ac, char *av[], char *env[]) {
 			pid = fork();
 			if (pid == 0)
 			{
-				dup2(fd[1] STDOUT_FILENO);
+				dup2(fd[1], STDOUT_FILENO);
 				close(fd[0]);
 				close(fd[1]);
 				if (ft_exe(av, i, tmp_fd, env))
