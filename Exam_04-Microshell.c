@@ -54,7 +54,7 @@ int main(int ac, char *av[], char *env[]) {
 				tmp_fd = dup(STDIN_FILENO)
 			}
 		}
-                //Part 3: fork, pid == 0 - ft_exe, pid != 0 - waitpid.
+                //Part 3: pid = fork(), if pid == 0 - ft_exe, if pid != 0 - waitpid.
 		else if (i != 0 && strcmp(av[i], "|") == 0)
 		{
 			pipe(fd);
@@ -73,7 +73,7 @@ int main(int ac, char *av[], char *env[]) {
 				close(tmp_fd);
 				tmp_fd = fd[0];
 			}
-                //Part 4: pipe, pid == 0, pid != 0.
+                //Part 4: pipe(fd), pid = fork(), if pid == 0, if pid != 0.
 		}
 	}
 	close(tmp_fd);
