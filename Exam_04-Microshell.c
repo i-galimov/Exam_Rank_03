@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
-int ft_message(char *str, char *arg) {
+int ft_err(char *str, char *arg) {
 	while (*str)
 		write(2, str++, 1);
 	if (arg)
@@ -15,7 +15,7 @@ int ft_exe(char *av[], int i; int tmp_fd, char *env[]) {
 	dup2(tmp_fd, STDIN_FILENO);
 	close(tmp_fd);
 	execve(av[0], av, env);
-	return (ft_message("error: cannot execute ", av[0]));
+	return (ft_err("error: cannot execute ", av[0]));
 }
 int main(int ac, char *av[], char *env[]) {
 	int i = 0;
@@ -23,6 +23,7 @@ int main(int ac, char *av[], char *env[]) {
 	int tmp_fd = dup(STDIN_FILENO);
 	(void)ac;
 	int fd[2];
+        // Part 1: includes, ft_err, ft_exe, var in main.
 	while(av[i] && av[i + 1])
 	{
 		av = &av[i + 1];
@@ -32,10 +33,11 @@ int main(int ac, char *av[], char *env[]) {
 		if (strcmp(av[0], "cd") == 0)
 		{
 			if (i != 2)
-				ft_message("error: cd: bad arguments", NULL);
+				ft_err("error: cd: bad arguments", NULL);
 			else if (chdir(av[1]) != 0)
-				ft_message("error: cd: cannot change directory to ", av[1]);
+				ft_err("error: cd: cannot change directory to ", av[1]);
 		}
+                //Part 2: cycle, av++, cd.
 		else if (i != 0 && (av[i] == NULL || strcmp(av[i], ";") == 0))
 		{
 			pid = fork();
@@ -52,6 +54,7 @@ int main(int ac, char *av[], char *env[]) {
 				tmp_fd = dup(STDIN_FILENO)
 			}
 		}
+                //Part 3: fork, pid, exe, waitpid.
 		else if (i != 0 && strcmp(av[i], "|") == 0)
 		{
 			pipe(fd);
@@ -70,6 +73,7 @@ int main(int ac, char *av[], char *env[]) {
 				close(tmp_fd);
 				tmp_fd = fd[0];
 			}
+                //Part 4: pipe, pid == 0, pid != 0.
 		}
 	}
 	close(tmp_fd);
