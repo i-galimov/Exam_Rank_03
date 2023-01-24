@@ -54,7 +54,7 @@ int main(int ac, char *av[], char *env[]) {
 				tmp_fd = dup(STDIN_FILENO)
 			}
 		}
-                //Part 3: pid = fork(), if pid == 0 - ft_exe, if pid != 0 - waitpid.
+                //Part 3: pid = fork(), if pid == 0 - ft_exe, if pid != 0 - while(waitpid(-1, NULL, WUNTRACED) != -1).
 		else if (i != 0 && strcmp(av[i], "|") == 0)
 		{
 			pipe(fd);
