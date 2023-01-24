@@ -73,9 +73,9 @@ int main(int ac, char *av[], char *env[]) {
 				close(tmp_fd);
 				tmp_fd = fd[0];
 			}
-                //Part 4: pipe(fd), pid = fork(), if pid == 0, if pid != 0.
 		}
 	}
 	close(tmp_fd);
 	return (0);
+        //Part 4: pipe(fd), pid = fork(), if pid == 0, if pid != 0.
 }
