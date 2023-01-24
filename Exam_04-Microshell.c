@@ -37,7 +37,7 @@ int main(int ac, char *av[], char *env[]) {
 			else if (chdir(av[1]) != 0)
 				ft_err("error: cd: cannot change directory to ", av[1]);
 		}
-                //Part 2: cycle, av++, cd.
+                //Part 2: cycle, av++, cd - i != 2, cd - chdir(av[1]) != 0.
 		else if (i != 0 && (av[i] == NULL || strcmp(av[i], ";") == 0))
 		{
 			pid = fork();
@@ -54,7 +54,7 @@ int main(int ac, char *av[], char *env[]) {
 				tmp_fd = dup(STDIN_FILENO)
 			}
 		}
-                //Part 3: fork, pid, exe, waitpid.
+                //Part 3: fork, pid == 0 - ft_exe, pid != 0 - waitpid.
 		else if (i != 0 && strcmp(av[i], "|") == 0)
 		{
 			pipe(fd);
