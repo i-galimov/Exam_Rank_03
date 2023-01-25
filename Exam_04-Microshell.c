@@ -10,7 +10,7 @@ int ft_err(char *str, char *arg) {
 	write(2, "\n", 1);
 	return (1);
 }
-int ft_exe(char *av[], int i; int tmp_fd, char *env[]) {
+int ft_exe(char *av[], int i, int tmp_fd, char *env[]) {
 	av[i] = NULL;
 	dup2(tmp_fd, STDIN_FILENO);
 	close(tmp_fd);
