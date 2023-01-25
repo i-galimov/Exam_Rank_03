@@ -7,7 +7,7 @@ int ft_err(char *str, char *arg) {
 	if (arg)
 		while(*arg)
 			write(2, arg++, 1);
-	write(1, "\n", 1);
+	write(2, "\n", 1);
 	return (1);
 }
 int ft_exe(char *av[], int i; int tmp_fd, char *env[]) {
