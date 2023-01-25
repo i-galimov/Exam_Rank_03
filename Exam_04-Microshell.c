@@ -1,6 +1,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+
+//test
+/* #ifdef TEST_SH
+# define TEST		1
+#else
+# define TEST		0
+#endif */
+// test
 int ft_err(char *str, char *arg) {
 	while (*str)
 		write(2, str++, 1);
@@ -44,14 +52,14 @@ int main(int ac, char *av[], char *env[]) {
 			if (pid == 0)
 			{
 				if (ft_exe(av, i, tmp_fd, env))
-					return(1)
+					return(1);
 			}
 			else
 			{
 				close(tmp_fd);
 				while(waitpid(-1, NULL, WUNTRACED) != -1)
 					;
-				tmp_fd = dup(STDIN_FILENO)
+				tmp_fd = dup(STDIN_FILENO);
 			}
 		}
                 //Part 3: pid = fork(), if pid == 0 - ft_exe, if pid != 0 - while(waitpid(-1, NULL, WUNTRACED) != -1).
@@ -76,6 +84,10 @@ int main(int ac, char *av[], char *env[]) {
 		}
 	}
 	close(tmp_fd);
+    // test
+    //if (TEST)		// not needed in exam, but necessary if you want to use this tester:
+		//while (1);
+    // test
 	return (0);
         //Part 4: pipe(fd), pid = fork(), if pid == 0, if pid != 0.
 }
